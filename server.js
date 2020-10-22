@@ -3,12 +3,12 @@ require("express")().listen(1343);
 const db = require("quick.db");
 const discord = require("discord.js");
 const client = new discord.Client({ disableEveryone: true });
-client.login("NzUyMjU2OTIxNjI0NTEwNDg0.X1U_2g.5x9l3KICcfwiL_PWpZ6Zcf8ePQA");
+client.login("BOT-TOKEN-HERE");
 const fetch = require("node-fetch");
 const fs = require("fs");
 
 setInterval(() => {
-  var links = db.get("linkler");
+  var links = db.get("links");
   if (!links) return;
   var linkA = links.map(c => c.url);
   linkA.forEach(link => {
@@ -22,8 +22,8 @@ setInterval(() => {
 }, 60000);
 
 client.on("ready", () => {
-  if (!Array.isArray(db.get("linkler"))) {
-    db.set("linkler", []);
+  if (!Array.isArray(db.get("links"))) {
+    db.set("links", []);
   }
 });
 
@@ -36,26 +36,26 @@ client.on("message", message => {
       .then(() => {
         if (
           db
-            .get("linkler")
+            .get("links")
             .map(z => z.url)
             .includes(link)
         )
-          return message.channel.send("zaten var");
-        message.channel.send("eklendi");
-        db.push("linkler", { url: link, owner: message.author.id });
+          return message.channel.send("already have");
+        message.channel.send("added");
+        db.push("links", { url: link, owner: message.author.id });
       })
       .catch(e => {
-        return message.channel.send("Hata: " + e);
+        return message.channel.send("error: " + e);
       });
   }
 });
 
 client.on("message", async message => {
   if (!message.content.startsWith("u!eval")) return;
-  if (!["708260005643550720",""].includes(message.author.id))
+  if (!["OWNER-ID-HERE",""].includes(message.author.id))
     return;
   var args = message.content.split("u!eval")[1];
-  if (!args) return message.channel.send(":warning: | Kod?");
+  if (!args) return message.channel.send(":warning: | CODE?");
 
   const code = args;
 
