@@ -3,7 +3,7 @@ require("express")().listen(1343);
 const db = require("quick.db");
 const discord = require("discord.js");
 const client = new discord.Client({ disableEveryone: true });
-client.login("BOT-TOKEN-HERE");
+client.login("ADD-BOT-TOKEN-HERE");     //TOKEN HERE 
 const fetch = require("node-fetch");
 const fs = require("fs");
 
@@ -30,7 +30,7 @@ client.on("ready", () => {
 client.on("message", message => {
   if (message.author.bot) return;
   var spl = message.content.split(" ");
-  if (spl[0] == "u!add") {
+  if (spl[0] == ".add") {
     var link = spl[1];
     fetch(link)
       .then(() => {
@@ -51,10 +51,10 @@ client.on("message", message => {
 });
 
 client.on("message", async message => {
-  if (!message.content.startsWith("u!eval")) return;
-  if (!["OWNER-ID-HERE",""].includes(message.author.id))
+  if (!message.content.startsWith(".eval")) return;
+  if (!["OWNER-ID-HERE",""].includes(message.author.id))     //OWNER ID HERE
     return;
-  var args = message.content.split("u!eval")[1];
+  var args = message.content.split(".eval")[1];
   if (!args) return message.channel.send(":warning: | CODE?");
 
   const code = args;
