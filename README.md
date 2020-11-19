@@ -1,4 +1,6 @@
 # uptime-bot
+A uptime  bot for discord app based off discord.js
+
 Uptime all your discord  projects 7/24  with a single bot on glitch.
 
 Don't forget to add the bot token and owner id.
